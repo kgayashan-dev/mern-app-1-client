@@ -6,7 +6,7 @@ const User = ({ name, age, username, deleteUser, updateUser }) => {
       <div className="flex justify-end text-green-600"><FaUser /></div>
       <h3>User Name: {name}</h3>
       <h3>User Age: {age}</h3>
-      <h3>UserName: {username}</h3>
+      <h3>Address: {username}</h3>
       <div className="">
         <button
           onClick={deleteUser}

@@ -28,10 +28,10 @@ const Hm = () => {
 
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
-  const [userName, setUserName] = useState("");
+  const [address, setAddress] = useState("");
 
   const fetchData = () => {
-    Axios.get("http://localhost:3001/users")
+    Axios.get("http://localhost:4001/getUsers")
       .then((response) => {
         setListOfUsers(response.data);
       })
@@ -45,10 +45,10 @@ const Hm = () => {
   }, []);
 
   const createUser = () => {
-    Axios.post("http://localhost:3001/users", {
+    Axios.post("http://localhost:4001/createUsers", {
       name: name,
       age: age,
-      username: userName,
+      address: address,
     })
       .then((response) => {
         alert("User created!");
@@ -58,8 +58,10 @@ const Hm = () => {
       });
   };
 
+  // Delete user
+
   const deleteUser = (userId) => {
-    Axios.delete(`http://localhost:3001/users/${userId}`)
+    Axios.delete(`http://localhost:4001/deleteUser/${userId}`)
       .then((response) => {
         alert("User deleted!");
         fetchData(); // Fetch the updated user list after deleting a user
@@ -74,7 +76,7 @@ const Hm = () => {
     const updatedAge = prompt("Enter updated age:");
     const updatedUserName = prompt("Enter updated username:");
 
-    Axios.put(`http://localhost:3001/users/${userId}`, {
+    Axios.put(`http://localhost:4001/updateUser/${userId}`, {
       name: updatedName,
       age: parseInt(updatedAge),
       username: updatedUserName,
@@ -100,7 +102,7 @@ const Hm = () => {
                 className=""
                 name={user.name}
                 age={user.age}
-                username={user.username}
+                username={user.address}
                 deleteUser={() => deleteUser(user._id)}
                 updateUser={() => updateUser(user._id)}
               />
@@ -134,13 +136,13 @@ const Hm = () => {
             }}
           />
 
-          <label htmlFor="uname">UserName</label>
+          <label htmlFor="address">Address</label>
           <input
-            id="uname"
+            id="address"
             type="text"
             className="w-1/2 p-2 border-separate m-2"
             onChange={(e) => {
-              setUserName(e.target.value);
+              setAddress(e.target.value);
             }}
           />
 
